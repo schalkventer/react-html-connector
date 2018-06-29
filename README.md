@@ -9,13 +9,13 @@ Works with:
 
 ## Development
 
-This package is still considered experimental. This means that it works as intended, however features may still be change or removed in future versions. It is currently used in-house by the team at [OpenUp](https://github.com/orgs/OpenUpSA), however feel free to try it out and provide feedback via Github issues. If it addresses a use-case that is important to you please let me know at [schalk@openup.org.za](mailto:schalk@openup.org.za).
+This package is still considered experimental. This means that it works as intended, however features may still change or get removed in future versions. It is currently used in-house by the team at [OpenUp](https://github.com/orgs/OpenUpSA), however feel free to try it out and provide feedback via Github issues. If it addresses a use-case that is important to you please let me know at [schalk@openup.org.za](mailto:schalk@openup.org.za).
 
 ## Usage
 
-This package is intended to be used as an import into a NodeJS module resolution library like [Webpack](https://webpack.js.org/). 
+This package is intended to be imported into a NodeJS module resolver like [Webpack](https://webpack.js.org/). 
 
-However it is built in accordance with the [UMD JavaScript specification](https://github.com/umdjs/umd). This means that it can also be imported directly into the browser via a `<script>` tag from the following URL:
+However it is built in accordance with the [UMD JavaScript specification](https://github.com/umdjs/umd). This means that it can also be pulled directly into the browser via a `<script>` tag from the following URL:
 
 ```
 <script src="http://unpkg.com/react-html-connector"></script>
@@ -25,7 +25,7 @@ However it is built in accordance with the [UMD JavaScript specification](https:
 
 ##### 1. Make sure that you have the latest version of [NodeJS](https://nodejs.org/en/) installed:
 
-##### 2. Install the package along with _React_ and _React DOM_:
+##### 2. Install the package alongside _React_ and _React DOM_:
 ```
 npm install --save react react-dom react-html-connector
 ```
@@ -33,6 +33,7 @@ npm install --save react react-dom react-html-connector
 ##### 3. Create your server-side template:
 ```
 // Users.php
+
 
 <body>
   <div data-component="Users">
@@ -110,11 +111,11 @@ import ReactDOM from 'react-dom';
 import ReactHtmlConnector from 'react-html-connector';
 
 
-// Create instance of React HTML Connector
+// Create an instance of React HTML Connector.
 const userConnector = new ReactHtmlConnector(React.createElement, ReactDOM.render);
 
 
-// Define how values from template should be passed as props
+// Define how values from template should be passed as props.
 const query = {
   title: 'innerHTML',
   users: [
@@ -127,59 +128,58 @@ const query = {
 }
 
 
-// Use instance of connector to bind 'User' component to data-attribute in template and pass query
-userConnector.connect(Users, query);
+// Call `connect` to bind the 'User' component and associated properties to your template.
 ```
 
-##### 5. Congrats! Your component should be bound to a data attribute in your template.
-See a live example of the above at [https://codepen.io/schalkventer/pen/oyJeqg](https://codepen.io/schalkventer/pen/oyJeqg), or a Preact implimentation of it at [https://codepen.io/schalkventer/pen/MXZErW](https://codepen.io/schalkventer/pen/MXZErW)
+##### 5. Congrats! Your component should be bound to the `data-component="Users"` attribute.
+View a live Codepen example of the above at [https://codepen.io/schalkventer/pen/oyJeqg](https://codepen.io/schalkventer/pen/oyJeqg).
 
 ## API
 
 ### ReactHtmlConnector
 
-The package exposes a class constructor called `ReactHtmlConnector`. This constructor returns an object with various methods that can be used to ease integration of React with server-side templating.
+The `react-html-connector` package exposes a JavaScript class. The constructor associated with this class returns an object with various methods that can be called to ease integration of React with server-side templating.
 
 ```
-new ReactHtmlConnector(createElement, render, options)
+const connectorInstance = new ReactHtmlConnector(createElement, render, options)
 ```
 
-#### `createElement <function>` _required_
-Needs to be the React (or a React-like) `createElement` method (for example: `React.createElement`). By passing this manually you are able to specificy a specific version of React or React-like library. For example in order to use it with Preact you need to pass [Hyperscript](https://github.com/hyperhype/hyperscript) instead of the React `createElement` method (for example: `Preact.h`).
+##### `createElement <function>` _required_
+Needs to be a React (or a React-like) `createElement` method (for example: `React.createElement`). By passing this manually you are able to pass a specific version of React or React-like library. In order to use this package with Preact you need to pass [Hyperscript](https://github.com/hyperhype/hyperscript) instead of the React `createElement` method (for example: `Preact.h`).
 
-#### `render <function>` _required_
-Needs to be a React (or React-like) `render` method (for example: `ReactDOM.render`). By passing this manually you are able to specificy a specific version of React or React-like library. For example in order to use it with Preact you need to pass the Preact render method instead of the React DOM `render` method (for example: `Preact.render`).
+##### `render <function>` _required_
+Needs to be a React (or React-like) `render` method (for example: `ReactDOM.render`). By passing this manually you are able to pass a specific version of React DOM or React-like library. In order to use this package with Preact you need to pass the Preact render method instead of the React DOM `render` method (for example: `Preact.render`).
 
-#### `options <Object>` _optional_ | _default: null_
-Accepts an object of key/value pairs that sets specific rules/conditions. See the following parameters for all valid values that can be passed inside `options`.
+##### `options <Object>` _optional | default: null_
+Accepts an object of key-value pairs that set specific change the way the returned methods work. See the upcoming parameters for a list of valid `options` values.
 
-#### `options.scope <HTMLelement> `_optional_ | _default: window.document.body_
-Restricts the returned connect and nodeQuery method's searchable range to a specifc HTML node and its children. Useful for avoid conflicting attribute names used elsewhere in your template.
+##### `options.scope <HTMLelement> `_optional | default: window.document.body_
+Restricts the returned connect and nodeQuery methods' searchable range to a specifc HTML node and its children. Useful for avoid conflicting attribute names used elsewhere in your templates.
 
-#### `options.attribute <string> `_optional_ | _default: 'data-component'_
-Changes the name of the attribute used to bind components to your template. Useful when `data-component` is already in use or you want to use something more specific like `data-react-compoment`.
+##### `options.attribute <string> `_optional | default: 'data-component'_
+Changes the name of the attribute used to bind components to your templates. Useful when `data-component` is already in use or you want to use a more specific attribute like `data-react-compoment`.
 
-#### `options.library <'react' | 'preact'>` _optional_ | _default: 'react'_ 
-Specifies the returned connect method to parse params according to either the React or Preact library's inner rendering logic. For example, in Preact you need to pass a fourth parameter into `preact.render` to ensure that component replaces the relevant node, and that it does not simply get appended to the node.
+##### `options.library <'react' | 'preact'>` _optional | default: 'react'_ 
+Changes how the returned connect method parses params. For example, in Preact you need to pass a fourth parameter into `preact.render` to ensure that a component replaces the targeted HTML node, and not simply appends it to the existing content.
 
 ### Methods returned from ReactHtmlConnector constructor:
 
 ```
-const instance = new ReactHtmlConnector(createElement, render, options);
-instance.connect(_component_, _query_);
-const customQuery = instance.nodeQuery(_query_);
+const connectorInstance = new ReactHtmlConnector(createElement, render, options);
+connectorInstance.connect(_component_, _query_);
+const customQuery = connectorInstance.nodeQuery(_query_);
 ```
 
-#### `instance.connect.component <React Component>` _required_
-The React (or React-like) component that will be bound to a specific `data-component` attribute in your template. Retrieves the `name` property of the component and uses it to find the corresponding `data-component` value. You can have multiple `data-component` attributes in a template to initialise multiple instances of a component. Note that value in the `data-component` attribute is case sensitive.
+##### `connectorInstance.connect.component <React Component>` _required_
+The React (or React-like) component that will be bound to a specific `data-component` attribute in your template. Retrieves the `name` property of the React component and uses it to find the corresponding `data-component` value. You can have multiple `data-component` attributes in a template to initialise multiple instances of a component. Note that value in the `data-component` attribute is case sensitive.
 
-#### `instance.connect.query <Object | function>` _optional_ | _default: {}_
-Object that instructs what (and how) values should be parsed from your template into props passed to the component. The object passed to this parameter uses a custom schema, loosely inspired by [GraphQl](https://graphql.org/). This schema will be documented in more detail at some point (See [Issue #2](https://github.com/schalkventer/react-html-connector/issues/2).
+##### `connectorInstance.connect.query <Object | function>` _optional | default: {}_
+Object literal that instructs what (and how) values should be parsed from your template into props and passed to the component. The object passed to this parameter uses a custom schema, loosely inspired by [GraphQl](https://graphql.org/). This schema will be documented in more detail at some point (See [Issue #2](https://github.com/schalkventer/react-html-connector/issues/2).
 
-Alternatively, a callback can be passed to this parameter to override the default querying behaviour. This callback automatically passes the HTML node itself as a first argument. It also passes the `nodeQuery` method (covered below) as it's second argument. The callback should return an object that will then be passed as p[props](https://reactjs.org/docs/components-and-props.html) to the React component.
+Alternatively, a callback function can be passed to this parameter to override the default querying behaviour above. This callback automatically passes the HTML node itself as its first argument. It also passes the `nodeQuery` method (covered below) as it's second argument. The callback should return an object that will then be passed as [props](https://reactjs.org/docs/components-and-props.html) to the React component.
 
-#### `instance.nodeQuery.query <Object | function>` _optional_ | _default: {}_
-Similar to `instance.connect.query`, however this method allows you to use the custom query object schema independantly of the `instance.connect` method. Useful if you want use component value in JavaScript outside of the rendering of the component itself.
+#### `connectorInstance.nodeQuery.query <Object | function>` _optional | default: {}_
+Similar to `instance.connect.query`, however this method allows you to use the custom querying method independantly of the `instance.connect` method. Useful if you want parse values in your template independantly or before the component is rendered.
 
 
 
