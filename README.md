@@ -18,7 +18,7 @@ This package is intended to be used as an import into a NodeJS module resolution
 However it is compiled in accordance with the [UMD JavaScript specification](https://github.com/umdjs/umd). This means that it can also be imported directly into the browser via a `<script>` tag from the following URL:
 
 ```
-<script src="http://unpkg.com/react-html-connector" async></script>
+<script src="http://unpkg.com/react-html-connector"></script>
 ```
 
 ## Getting Started
@@ -35,14 +35,17 @@ npm install --save react react-dom react-html-connector
 // Users.php
 
 <body>
-  <ul data-component="Users">
-    <?php foreach ($user_array as $user) { ?>
-      <li data-users <?php $user[active] ? echo "data-active" : null ?>
-        <span data-name><?php $user[name] ?></span>
-      </li>
-      >
-    <?php } ?>
-  </ul>
+  <div data-component="Users">
+    <h1 data-title>Users List</h1>
+    <ul>
+      <?php foreach ($user_array as $user) { ?>
+        <li data-users <?php $user[active] ? echo "data-active" : null ?>
+          <span data-name><?php $user[name] ?></span>
+        </li>
+        >
+      <?php } ?>
+    </ul>
+  </div>
 </body>
 
 
@@ -54,15 +57,14 @@ npm install --save react react-dom react-html-connector
 // Users.jsx
 
 
-import React from 'react';
-
-
-export default class Users extends React.Component {
+class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAll: false,
+      showAll: true,
     }
+    
+    this.toggleShowAll = this.toggleShowAll.bind(this);
   }
 
   toggleShowAll() {
@@ -71,24 +73,27 @@ export default class Users extends React.Component {
 
   render() {
     return (
-      <ul>
-        {
-          users.map((user) => {
-            if (!this.state.showAll && !active) {
-              return null;
-            }
+      <div>
+        <h1>{this.props.title}</h1>
+        <ul>
+          {
+            this.props.users.map((user) => {
+              if (!this.state.showAll && !user.active) {
+                return null;
+              }
 
-            return (
-              <li>
-                <span>{name}</span>
-              </li>
-            )
+              return (
+                <li key={user.id}>
+                  <span>{user.name}</span>
+                </li>
+              )
+            })
           }
-        }
-      </ul>
-      <button onClick={this.toggleShowAll}>
-        {this.state.showAll ? 'Hide inactive' : 'Show inactive'}
-      </button>
+        </ul>
+        <button onClick={this.toggleShowAll}>
+          {this.state.showAll ? 'Hide inactive' : 'Show inactive'}
+        </button>
+      </div>
     )
   }
 }
@@ -100,14 +105,34 @@ export default class Users extends React.Component {
 ```
 // scripts.jsx
 
-s
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlConnector from 'react-html-connector';
 
-const { connect } = new ReactHtmlConnector (React.createElement, ReactDOM.render);
-connect(<Users />, { users: [{ name: 'innerHTML', active: 'boolean' }]});
+
+// Create instance of React HTML Connector
+const userConnector = new ReactHtmlConnector(React.createElement, ReactDOM.render);
+
+
+// Define how values from template should be passed as props
+const query = {
+  title: 'innerHTML',
+  users: [
+    {
+      id: 'number',
+      active: 'boolean',
+      name: 'innerHTML',
+    }
+  ]
+}
+
+
+// Use instance of connector to bind 'User' component to data-attribute in template and pass query
+userConnector.connect(Users, query);
 ```
+
+##### 5. Congrats! You're Component should be bound to a data attribute in your template.
+See a live example of the above at [https://codepen.io/schalkventer/pen/oyJeqg](https://codepen.io/schalkventer/pen/oyJeqg), or Preact implimentation of it at 
 
 <!-- ## API
 
