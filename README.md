@@ -1,4 +1,4 @@
-# 🔌 React HTML Connect &middot; [![](https://travis-ci.org/schalkventer/react-html-connect.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
+# 🔌 React HTML Connect &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
 
 A JavaScript function that eases integratation of React (or Preact) into existing server-side templating.
 
