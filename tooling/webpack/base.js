@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: resolve(__dirname, './../../dist'),
-    library: 'ReactHtmlConnect',
+    library: 'ReactHtmlConnector',
     libraryTarget: 'umd',
   },
 

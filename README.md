@@ -1,4 +1,4 @@
-# 🔌 React HTML Connect &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
+# 🔌 React HTML Connector &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
 
 A JavaScript function that eases integratation of React (or Preact) into existing server-side templating.
 
@@ -18,7 +18,7 @@ This package is intended to be used as an import into a NodeJS module resolution
 However it is compiled in accordance with the [UMD JavaScript specification](https://github.com/umdjs/umd). This means that it can also be imported directly into the browser via a `<script>` tag from the following URL:
 
 ```
-<script src="http://unpkg.com/react-html-connect" async></script>
+<script src="http://unpkg.com/react-html-connector" async></script>
 ```
 
 ## Getting Started
@@ -27,7 +27,7 @@ However it is compiled in accordance with the [UMD JavaScript specification](htt
 
 ##### 2. Install the package along with _React_ and _React DOM_:
 ```
-npm install --save react react-dom react-html-connect
+npm install --save react react-dom react-html-connector
 ```
 
 ##### 3. Create your server-side template:
@@ -103,9 +103,9 @@ export default class Users extends React.Component {
 s
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactHtmlConnect from 'react-html-connector';
+import ReactHtmlConnector from 'react-html-connector';
 
-const { connect } = new ReactHtmlConnect (React.createElement, ReactDOM.render);
+const { connect } = new ReactHtmlConnector (React.createElement, ReactDOM.render);
 connect(<Users />, { users: [{ name: 'innerHTML', active: 'boolean' }]});
 ```
 
