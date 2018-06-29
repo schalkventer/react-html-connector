@@ -1,4 +1,4 @@
-# 🔌 React HTML Connector &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
+# 🔌 React HTML Connector &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/npm/dm/react-html-connector.svg)](https://www.npmjs.com/package/react-html-connector) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
 
 A JavaScript function that eases integratation of [React](https://reactjs.org/) (or [Preact](https://preactjs.com/)) components into existing server-side templating.
 
