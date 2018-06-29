@@ -32,8 +32,15 @@ const parseValue = (result, arrayParent, objectIndex = 0) => (key, innerNode, va
 };
 
 
+const isFunction = value => value && {}.toString.call(value) === '[object Function]'
+
+
 export default function nodeQuery(query, node = window.document.body) {
   checkPropTypes(params, { node, query }, 'argument', 'nodeQuery');
+
+  if (isFunction(query)) {
+    return query(node, nodeQuery);
+  }
 
   if (!isObjectLiteral(query)) {
     console.warn('query should be an object literal');

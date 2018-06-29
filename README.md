@@ -1,21 +1,21 @@
 # 🔌 React HTML Connector &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
 
-A JavaScript function that eases integratation of React (or Preact) into existing server-side templating.
+A JavaScript function that eases integratation of [React](https://reactjs.org/) (or [Preact](https://preactjs.com/)) components into existing server-side templating.
 
 Works with:
 - [Wordpress](https://wordpress.org)
 - [Jekyll](https://jekyllrb.com/)
 - [Django](https://www.djangoproject.com/)
 
-## Package State
+## Development
 
-This package is still considered experimental. This means that it works as intended, however features may still be change or be removed in radically in future versions. It is currently used in-house by the team at [OpenUp](https://github.com/orgs/OpenUpSA), however feel free to try it out and provide feedback. If it addresses a use-case that is important to you or you come across any bugs, please let me know at [schalk@openup.org.za](mailto:schalk@openup.org.za).
+This package is still considered experimental. This means that it works as intended, however features may still be change or removed in future versions. It is currently used in-house by the team at [OpenUp](https://github.com/orgs/OpenUpSA), however feel free to try it out and provide feedback via Github issues. If it addresses a use-case that is important to you please let me know at [schalk@openup.org.za](mailto:schalk@openup.org.za).
 
 ## Usage
 
 This package is intended to be used as an import into a NodeJS module resolution library like [Webpack](https://webpack.js.org/). 
 
-However it is compiled in accordance with the [UMD JavaScript specification](https://github.com/umdjs/umd). This means that it can also be imported directly into the browser via a `<script>` tag from the following URL:
+However it is built in accordance with the [UMD JavaScript specification](https://github.com/umdjs/umd). This means that it can also be imported directly into the browser via a `<script>` tag from the following URL:
 
 ```
 <script src="http://unpkg.com/react-html-connector"></script>
@@ -100,7 +100,7 @@ class Users extends React.Component {
 ```
 
 
-##### 4. Connect React component to 'data-component' attribute:
+##### 4. Connect React component to your 'data-component' attribute:
 
 ```
 // scripts.jsx
@@ -131,17 +131,68 @@ const query = {
 userConnector.connect(Users, query);
 ```
 
-##### 5. Congrats! You're Component should be bound to a data attribute in your template.
-See a live example of the above at [https://codepen.io/schalkventer/pen/oyJeqg](https://codepen.io/schalkventer/pen/oyJeqg), or Preact implimentation of it at 
+##### 5. Congrats! Your component should be bound to a data attribute in your template.
+See a live example of the above at [https://codepen.io/schalkventer/pen/oyJeqg](https://codepen.io/schalkventer/pen/oyJeqg), or a Preact implimentation of it at [https://codepen.io/schalkventer/pen/MXZErW](https://codepen.io/schalkventer/pen/MXZErW)
+
+## API
+
+### ReactHtmlConnector
+
+The package exposes a class constructor called `ReactHtmlConnector`. This constructor returns an object with various methods that can be used to ease integration of React with server-side templating.
+
+```
+new ReactHtmlConnector(createElement, render, options)
+```
+
+#### `createElement <function>` _required_
+Needs to be the React (or a React-like) `createElement` method (for example: `React.createElement`). By passing this manually you are able to specificy a specific version of React or React-like library. For example in order to use it with Preact you need to pass [Hyperscript](https://github.com/hyperhype/hyperscript) instead of the React `createElement` method (for example: `Preact.h`).
+
+#### `render <function>` _required_
+Needs to be a React (or React-like) `render` method (for example: `ReactDOM.render`). By passing this manually you are able to specificy a specific version of React or React-like library. For example in order to use it with Preact you need to pass the Preact render method instead of the React DOM `render` method (for example: `Preact.render`).
+
+#### `options <Object>` _optional_ | _default: null_
+Accepts an object of key/value pairs that sets specific rules/conditions. See the following parameters for all valid values that can be passed inside `options`.
+
+#### `options.scope <HTMLelement> `_optional_ | _default: window.document.body_
+Restricts the returned connect and nodeQuery method's searchable range to a specifc HTML node and its children. Useful for avoid conflicting attribute names used elsewhere in your template.
+
+#### `options.attribute <string> `_optional_ | _default: 'data-component'_
+Changes the name of the attribute used to bind components to your template. Useful when `data-component` is already in use or you want to use something more specific like `data-react-compoment`.
+
+#### `options.library <'react' | 'preact'>` _optional_ | _default: 'react'_ 
+Specifies the returned connect method to parse params according to either the React or Preact library's inner rendering logic. For example, in Preact you need to pass a fourth parameter into `preact.render` to ensure that component replaces the relevant node, and that it does not simply get appended to the node.
+
+### Methods returned from ReactHtmlConnector constructor:
+
+```
+const instance = new ReactHtmlConnector(createElement, render, options);
+instance.connect(_component_, _query_);
+const customQuery = instance.nodeQuery(_query_);
+```
+
+#### `instance.connect.component <React Component>` _required_
+The React (or React-like) component that will be bound to a specific `data-component` attribute in your template. Retrieves the `name` property of the component and uses it to find the corresponding `data-component` value. You can have multiple `data-component` attributes in a template to initialise multiple instances of a component. Note that value in the `data-component` attribute is case sensitive.
+
+#### `instance.connect.query <Object | function>` _optional_ | _default: {}_
+Object that instructs what (and how) values should be parsed from your template into props passed to the component. The object passed to this parameter uses a custom schema, loosely inspired by [GraphQl](https://graphql.org/). This schema will be documented in more detail at some point (See [Issue #2](https://github.com/schalkventer/react-html-connector/issues/2).
+
+Alternatively, a callback can be passed to this parameter to override the default querying behaviour. This callback automatically passes the HTML node itself as a first argument. It also passes the `nodeQuery` method (covered below) as it's second argument. The callback should return an object that will then be passed as p[props](https://reactjs.org/docs/components-and-props.html) to the React component.
+
+#### `instance.nodeQuery.query <Object | function>` _optional_ | _default: {}_
+Similar to `instance.connect.query`, however this method allows you to use the custom query object schema independantly of the `instance.connect` method. Useful if you want use component value in JavaScript outside of the rendering of the component itself.
+
+
 
 <!-- ## API
+
+
 
 ### Primary
 
 connect(_render_, _component_, _props_, _additional options_)
 - `createElement <function>`: This needs to be the React (or React-like) `createElement` method (for example: `React.createElement`). By passing this manually you can control what version of React you want to use, and enables compatibility with React-like libraries such as Preact (for example `Preact.h`). 
 - `render <function>`: This needs to be a React (or React-like) `render` method (for example: `ReactDOM.render`. By passing this manually you can control what version of React you want to use, and enables compatibility with React-like libraries such as Preact (for example `Preact.h`). 
-- `component <React Component>`: The React (or React-like) component you want to bind to a specific area in your template (via the `data-component` attributes). Converts the name of the component to a string and searches for a `data-component` attribute that contains the string (for example: `data-component="ExampleComponent"`). Note that the name in the component data attribute is case sensitive.
+- `component <React Component>`: 
 - `query <Object> | <function> (optional, default: null)`: Optional parameter that instructs the connect function on how to collect and pass values from templates into the component vai props. The value passed to `query` uses custom schema, created specifically for this package (learn more at [Passing props to components](#passing-props-to-components)). Alternatively, `query` also accepts a function for more control over props passed.
 - `options <Object>: (optional, default: null)`: Optional parameter that accepts an object of key/value pairs that sets specific rules/conditions. See the next section for all valid values that can be passed inside `options`:
 

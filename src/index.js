@@ -9,11 +9,11 @@ export default class ReactHtmlConnect {
     this.options = options;
   }
 
-  connect(Component, query) {
-    return connect(this.createElement, this.render, Component, query, this.options);
+  connect(component, query) {
+    return connect(this.createElement, this.render, component, query, this.options);
   }
 
-  nodeQuery(query, node) {
-    return nodeQuery(query, node);
+  nodeQuery(query) {
+    return nodeQuery(query, this.options.scope);
   }
 }
