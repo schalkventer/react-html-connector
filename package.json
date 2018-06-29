@@ -1,5 +1,5 @@
 {
-  "name": "react-html-connect",
+  "name": "react-html-connector",
   "version": "0.1.0",
   "description": "A JavaScript function that eases integratation between React (or Preact) into existing server-side templating.",
   "main": "dist/index.min.js",
