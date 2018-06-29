@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+before_script:
+  - npm run build
+
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: "venterschalk@gmail.com"
+  api_key:
+    secure: ck4U8hgCjHirSbyuPHqXg44RlWCN1gUKLFTvdtwNv8oKuaujbQ4MyacwY7ERK5SxV8m5A+qnOfv5YSgE2sKPqihMVrV0/UCQGIXKWhRk0PU1UZVcePYiTI9XtYcodDQCeljgyokQPNFjIgYItD+pmXnUF59zxVU+2ASQK+uR5/Hl1ed39QbhlWBvePfvJ7ufFBQtbfcv6eQZiMMTTdCRJMQjjZtr9cTSVVsg34JMTnZxkY9fRBjm2VMS612tPdFHOdbX4dEVl/GXo2zml9Cl5vtDa3gReA7cDQw1K3aeMLxCGmKcbk/FTBur2NlhEOuaJp9PD5uFSZonMAdech1H5JY1aUOFWiGro3AzmBJXqjIVPws4sjwTDH313IJocf7rjpImrWiXnDvMFjYQOjbXQsy0eZxqb4bjPb+EC36jeFJn9LyM7BJfIRKzXRqCqd1X6PW8n+EHFfAG8MiiS+aW8gV3lcOCgkn/FBiqBA6Q+a7m1bmlbvTPRCrTi6hz1LEp4Y0Y0hF9sDliUEdQ4fch63kDiKzuHEwAlbp3s+JFwUZ+nu2TqbwFQw3mwRYUiGkvpyJ+uNnqUTVbGNyNLubU2tfBDn6mGz+NVo83KQI9RoqUKbpq/M6LwkEfQ/4gtFmKdNquTo3VanyqNLf+71w6xWE6QksvhQR7aJbp65FwFks=
+  on:
+    branch: master

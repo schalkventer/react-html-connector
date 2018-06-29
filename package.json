@@ -1,0 +1,106 @@
+{
+  "name": "react-html-connect",
+  "version": "0.1.5",
+  "description": "A JavaScript function that eases integratation between React (or Preact) into existing server-side templating.",
+  "main": "dist/index.min.js",
+  "keywords": [
+    "React",
+    "HTML",
+    "php",
+    "Wordpress",
+    "Python",
+    "Django",
+    "Liquid",
+    "Jekyll"
+  ],
+  "homepage": "https://github.com/schalkventer/react-html-connect#readme",
+  "author": "Schalk Venter",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schalkventer/react-html-connect"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config tooling/webpack/config.js & webpack --config tooling/webpack/config.dev.js "
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.5",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "browserslist": "^3.2.8",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-compat": "^2.4.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsdoc": "^3.7.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.10.0",
+    "jest": "^23.2.0",
+    "jsdom": "^11.11.0",
+    "mock-fs": "^4.5.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8",
+    "webpack-strip": "^0.1.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "node_modules",
+      ".history"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "stage-0"
+    ],
+    "plugins": [
+      "add-module-exports"
+    ]
+  },
+  "browserslist": [
+    "chrome >= 50",
+    "firefox >= 50",
+    "safari >= 5",
+    "explorer >= 9",
+    "edge > 0"
+  ],
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "node": true
+    },
+    "extends": "airbnb",
+    "plugins": [
+      "compat",
+      "jsdoc"
+    ],
+    "rules": {
+      "jsdoc/check-param-names": 1,
+      "jsdoc/check-tag-names": 1,
+      "jsdoc/check-types": 1,
+      "jsdoc/newline-after-description": 1,
+      "jsdoc/require-description-complete-sentence": 1,
+      "jsdoc/require-example": 1,
+      "jsdoc/require-hyphen-before-param-description": 1,
+      "jsdoc/require-param": 1,
+      "jsdoc/require-param-description": 1,
+      "jsdoc/require-param-name": 1,
+      "jsdoc/require-param-type": 1,
+      "jsdoc/require-returns-description": 1,
+      "jsdoc/require-returns-type": 1,
+      "jsdoc/valid-types": 1
+    }
+  }
+}
