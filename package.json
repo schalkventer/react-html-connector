@@ -1,6 +1,6 @@
 {
   "name": "react-html-connect",
-  "version": "0.1.5",
+  "version": "0.1.0",
   "description": "A JavaScript function that eases integratation between React (or Preact) into existing server-side templating.",
   "main": "dist/index.min.js",
   "keywords": [
@@ -13,12 +13,12 @@
     "Liquid",
     "Jekyll"
   ],
-  "homepage": "https://github.com/schalkventer/react-html-connect#readme",
+  "homepage": "https://github.com/schalkventer/react-html-connector#readme",
   "author": "Schalk Venter",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/schalkventer/react-html-connect"
+    "url": "https://github.com/schalkventer/react-html-connector"
   },
   "scripts": {
     "test": "jest",
