@@ -24,10 +24,8 @@
     "test": "jest",
     "build": "webpack --config tooling/webpack/config.js & webpack --config tooling/webpack/config.dev.js "
   },
-  "dependencies": {
-    "prop-types": "^15.6.2"
-  },
   "devDependencies": {
+    "prop-types": "^15.6.2",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
     "babel-loader": "^7.1.4",
