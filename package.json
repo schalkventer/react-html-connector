@@ -1,6 +1,6 @@
 {
   "name": "react-html-connector",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A JavaScript function that eases integratation between React (or Preact) into existing server-side templating.",
   "main": "dist/index.min.js",
   "keywords": [
@@ -8,10 +8,11 @@
     "HTML",
     "php",
     "Wordpress",
+    "Magento",
     "Python",
     "Django",
     "Liquid",
-    "Jekyll"
+    "Jekyll",
   ],
   "homepage": "https://github.com/schalkventer/react-html-connector#readme",
   "author": "Schalk Venter",

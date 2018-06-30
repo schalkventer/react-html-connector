@@ -4,6 +4,7 @@ A JavaScript function that eases integration  of [React](https://reactjs.org/) (
 
 Works with:
 - [Wordpress](https://wordpress.org)
+- [Magento](https://www.magento.com/)
 - [Jekyll](https://jekyllrb.com/)
 - [Django](https://www.djangoproject.com/)
 

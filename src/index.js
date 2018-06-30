@@ -7,6 +7,9 @@ export default class ReactHtmlConnect {
     this.createElement = createElement;
     this.render = render;
     this.options = options;
+
+    this.connect = this.connect.bind(this);
+    this.nodeQuery = this.nodeQuery.bind(this);
   }
 
   connect(component, query) {
