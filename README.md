@@ -1,6 +1,6 @@
 # 🔌 React HTML Connector &middot; [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/npm/dm/react-html-connector.svg)](https://www.npmjs.com/package/react-html-connector) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
 
-A JavaScript function that eases integratation of [React](https://reactjs.org/) (or [Preact](https://preactjs.com/)) components into existing server-side templating.
+A JavaScript function that eases integration  of [React](https://reactjs.org/) (or [Preact](https://preactjs.com/)) components into existing server-side templating.
 
 Works with:
 - [Wordpress](https://wordpress.org)
@@ -129,6 +129,7 @@ const query = {
 
 
 // Call `connect` to bind the 'User' component and associated properties to your template.
+userConnector.connect(Users, query)
 ```
 
 ##### 5. Congrats! Your component should be bound to the `data-component="Users"` attribute.
