@@ -11,6 +11,10 @@ export default function connect(createElement, render, component, query, options
 
   nodesArray.forEach((node) => {
     const props = nodeQuery(query, node);
-    render(createElement(component, props, null), node, library === 'preact' ? node.firstElementChild : null);
+    render(
+      createElement(component, props, null),
+      library === 'preact' ? node.parent : node,
+      library === 'preact' ? node : null,
+    );
   });
 }
