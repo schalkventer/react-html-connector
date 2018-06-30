@@ -12,8 +12,8 @@ export default class ReactHtmlConnect {
     this.nodeQuery = this.nodeQuery.bind(this);
   }
 
-  connect(component, query) {
-    return connect(this.createElement, this.render, component, query, this.options);
+  connect(component, name, query) {
+    return connect(this.createElement, this.render, component, name, query, this.options);
   }
 
   nodeQuery(query) {

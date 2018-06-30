@@ -130,7 +130,7 @@ const query = {
 
 
 // Call `connect` to bind the 'User' component and associated properties to your template.
-userConnector.connect(Users, query)
+userConnector.connect(Users, 'Users', query)
 ```
 
 ##### 5. Congrats! Your component should be bound to the `data-component="Users"` attribute.
@@ -173,7 +173,10 @@ const customQuery = connectorInstance.nodeQuery(_query_);
 ```
 
 ##### `connectorInstance.connect.component <React Component>` _required_
-The React (or React-like) component that will be bound to a specific `data-component` attribute in your template. Retrieves the `name` property of the React component and uses it to find the corresponding `data-component` value. You can have multiple `data-component` attributes in a template to initialise multiple instances of a component. Note that value in the `data-component` attribute is case sensitive.
+The React (or React-like) component that will be bound to a specific `data-component` attribute in your template.
+
+##### `connectorInstance.connect.name <string>` _required_
+The string value used in the `data-component` attribute of the HTML node you want to target. You can have multiple of the same `data-component` string in a template to initialise multiple instances of a component. Note that the node itself (and everything inside) will be swapped out for the React component.
 
 ##### `connectorInstance.connect.query <Object | function>` _optional | default: {}_
 Object literal that instructs what (and how) values should be parsed from your template into props and passed to the component. The object passed to this parameter uses a custom schema, loosely inspired by [GraphQl](https://graphql.org/). This schema will be documented in more detail at some point (See [Issue #2](https://github.com/schalkventer/react-html-connector/issues/2).
