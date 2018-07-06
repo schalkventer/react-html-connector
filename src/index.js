@@ -1,6 +1,5 @@
 import nodeQuery from './modules/nodeQuery';
 import connect from './modules/connect';
-import disconnect from './modules/disconnect';
 
 
 export default class ReactHtmlConnect {
@@ -25,10 +24,6 @@ export default class ReactHtmlConnect {
     );
 
     return null;
-  }
-
-  disconnect(name, remove) {
-    return disconnect(name, remove, this.render, this.originalHtml);
   }
 
   nodeQuery(query) {
