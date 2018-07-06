@@ -164,6 +164,12 @@ Changes the name of the attribute used to bind components to your templates. Use
 ##### `options.library <'react' | 'preact'>` _optional | default: 'react'_ 
 Changes how the returned connect method parses params. For example, in Preact you need to pass a fourth parameter into `preact.render` to ensure that a component replaces the targeted HTML node, and not simply appends it to the existing content.
 
+##### `options.store <Object>` _optional | default: null_ 
+Description pending...
+
+##### `options.provider <function>` _optional | default: null_ 
+Description pending...
+
 ### Methods returned from ReactHtmlConnector constructor:
 
 ```
