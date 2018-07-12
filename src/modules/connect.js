@@ -2,7 +2,14 @@ import nodeQuery from './nodeQuery';
 
 
 export default function connect(createElement, render, component, name, query = {}, options = {}) {
-  const { scope, attribute, library, provider, store } = options;
+  const {
+    scope,
+    attribute,
+    library,
+    provider,
+    store,
+  } = options;
+
   const base = scope || document;
   const realAttribute = attribute || 'data-component';
 
@@ -11,6 +18,10 @@ export default function connect(createElement, render, component, name, query = 
   return nodesArray.map((node) => {
     const innerHtml = node.innerHTML;
     const props = nodeQuery(query, node);
+
+    if (library === 'none') {
+      return component(props);
+    }
 
     const reduxWrap = () => createElement(
       provider,
