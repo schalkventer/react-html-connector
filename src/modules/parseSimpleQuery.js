@@ -15,7 +15,8 @@ const params = {
       value !== 'number' &&
       value !== 'json' &&
       value !== 'innerHTML' &&
-      value !== 'outerHTML'
+      value !== 'outerHTML' &&
+      value !== 'innerText'
     );
 
     if (value && isInvalidQuery) {
@@ -71,6 +72,7 @@ export default function parseSimpleQuery(name, node, query) {
     case 'json': return JSON.parse(decodeHtmlEntities(value));
     case 'innerHTML': return node.innerHTML;
     case 'outerHTML': return node.outerHTML;
+    case 'innerText': return node.innerText;
     default: return null;
   }
 }
