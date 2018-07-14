@@ -40,12 +40,11 @@ npm install --save react react-dom react-html-connector
   <div data-component="Users">
     <h1 data-title>Users List</h1>
     <ul>
-      <?php foreach ($user_array as $user) { ?>
+      <?php foreach ($user_array as $user): ?>
         <li data-users <?php $user[active] ? echo "data-active" : null ?>
           <span data-name><?php $user[name] ?></span>
         </li>
-        >
-      <?php } ?>
+      <?php endforeach ?>
     </ul>
   </div>
 </body>
