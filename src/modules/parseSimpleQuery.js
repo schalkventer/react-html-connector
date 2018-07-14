@@ -1,5 +1,6 @@
 import PropTypes, { checkPropTypes } from 'prop-types';
 import decodeHtmlEntities from './decodeHtmlEntities';
+import isFunction from './isFunction';
 
 
 const params = {
@@ -64,6 +65,10 @@ export default function parseSimpleQuery(name, node, query) {
 
   if (query === 'boolean') {
     return value !== null;
+  }
+
+  if (isFunction(query)) {
+    return query(node, value);
   }
 
   switch (query) {
