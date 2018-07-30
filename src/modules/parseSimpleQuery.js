@@ -1,4 +1,5 @@
 import PropTypes, { checkPropTypes } from 'prop-types';
+import { parse } from 'query-string';
 import decodeHtmlEntities from './decodeHtmlEntities';
 import isFunction from './isFunction';
 
@@ -17,7 +18,8 @@ const params = {
       value !== 'json' &&
       value !== 'innerHTML' &&
       value !== 'outerHTML' &&
-      value !== 'innerText'
+      value !== 'innerText' &&
+      value !== 'url'
     );
 
     if (value && isInvalidQuery) {
@@ -78,6 +80,7 @@ export default function parseSimpleQuery(name, node, query) {
     case 'innerHTML': return node.innerHTML;
     case 'outerHTML': return node.outerHTML;
     case 'innerText': return node.innerText;
+    case 'url': return parse(window.location.search)[name];
     default: return null;
   }
 }
