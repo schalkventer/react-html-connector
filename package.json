@@ -55,6 +55,8 @@
     "webpack-strip": "^0.1.0"
   },
   "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
     "testPathIgnorePatterns": [
       "node_modules",
       ".history"
