@@ -74,12 +74,12 @@ export default function parseSimpleQuery(name, node, query) {
   }
 
   switch (query) {
-    case 'string': return value;
-    case 'number': return parseFloat(value);
-    case 'json': return JSON.parse(decodeHtmlEntities(value));
-    case 'innerHTML': return node.innerHTML;
-    case 'outerHTML': return node.outerHTML;
-    case 'innerText': return node.innerText;
+    case 'string': return value !== null && value;
+    case 'number': return value !== null &&parseFloat(value);
+    case 'json': return value !== null &&JSON.parse(decodeHtmlEntities(value));
+    case 'innerHTML': return value !== null && node.innerHTML;
+    case 'outerHTML': return value !== null && node.outerHTML;
+    case 'innerText': return value !== null && node.innerText;
     case 'url': return parse(window.location.search)[name];
     default: return null;
   }
